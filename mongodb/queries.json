@@ -1,0 +1,29 @@
+// Q1:
+db.pedidos.find({ cliente_id: ObjectId("...") }).sort({ data_pedido: -1 }).limit(3);
+
+// Q2:
+db.produtos.find({ categoria: "Eletrônicos" }).sort({ preco: 1 });
+
+// Q3:
+db.pedidos.find({ cliente_id: ObjectId("..."), status: "entregue" });
+
+// Q4:
+db.pedidos.aggregate([
+    { $unwind: "$itens" },
+    { $group: { _id: "$itens.nome_produto", total_vendido: { $sum: "$itens.quantidade" } } },
+    { $sort: { total_vendido: -1 } },
+    { $limit: 5 }
+]);
+
+// Q5:
+db.pedidos.find({
+    "pagamento.tipo": "pix",
+    "pagamento.data_pagamento": { $gte: ISODate("...") } 
+});
+
+// Q6:
+db.pedidos.aggregate([
+    { $match: { cliente_id: ObjectId("..."), data_pedido: { $gte: ISODate("...") } } }, 
+    { $group: { _id: "$cliente_id", total_gasto: { $sum: "$valor_total" } } }
+]);
+

@@ -1,0 +1,45 @@
+// coleção: clientes
+{
+    "_id": ObjectId("..."),        
+    "nome": "João da Silva",       
+    "email": "joao@example.com",   
+    "telefone": "11999998888",     
+    "data_cadastro": ISODate("..."), 
+    "cpf": "123.456.789-00"        
+  }
+  
+  // coleção: produtos
+  {
+    "_id": ObjectId("..."),         
+    "nome": "Laptop Gamer XPTO",   
+    "categoria": "Eletrônicos",    
+    "preco": 7500.00,              
+    "estoque": 50                  
+  }
+  
+  // coleção: pedidos
+  {
+    "_id": ObjectId("..."),       
+    "cliente_id": ObjectId("..."), 
+    "data_pedido": ISODate("..."),
+    "status": "entregue",         
+  
+    // sub-entidade 'Pedido: itens (produto + quantidade)'
+    "itens": [
+      {
+        "produto_id": ObjectId("..."), // Link para a entidade 'Produto' original
+        "quantidade": 1,               // Atributo explícito de 'itens'
+        "nome_produto": "Laptop Gamer XPTO",
+        "preco_unitario": 7500.00
+      }
+    ],
+  
+    "valor_total": 7500.00,       
+  
+    // entidade 'Pagamento'
+    "pagamento": {
+      "tipo": "pix",                   
+      "status": "aprovado",            
+      "data_pagamento": ISODate("...") 
+    }
+  }
