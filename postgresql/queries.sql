@@ -10,11 +10,11 @@ ORDER BY preco ASC;
 
 -- Q3:
 SELECT P.* FROM 
-pedido P JOIN clientes C ON P.id_cliente = C.id 
+pedidos P JOIN clientes C ON P.id_cliente = C.id 
 WHERE C.email = 'cliente@email.com' AND P.status = 'entregue';
 
 -- Q4:
-SELECT PR.nome, SUM(PI.quantidade) as total_vendido FROM pedidos_itens PI 
+SELECT PR.nome, SUM(PI.quantidade) as total_vendido FROM pedido_itens PI 
 JOIN produtos PR ON PI.id_produto = PR.id 
 GROUP BY PR.nome 
 ORDER BY total_vendido DESC LIMIT 5;
