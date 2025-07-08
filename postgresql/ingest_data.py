@@ -13,7 +13,7 @@ DB_PASS = "35263646"
 DB_HOST = "localhost"
 DB_PORT = "5432"
 
-# Novos números
+# Núm. de registrs
 NUM_CLIENTES = 20000
 NUM_PRODUTOS = 5000
 NUM_PEDIDOS = 30000
