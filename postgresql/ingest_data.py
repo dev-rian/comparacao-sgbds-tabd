@@ -30,7 +30,7 @@ print("Iniciando a geração e ingestão de dados para PostgreSQL...")
 start_time = time.time()
 
 try:
-    # 1. Clientes
+    # Clientes
     print(f"Gerando e inserindo {NUM_CLIENTES} clientes...")
     clientes = [
         (fake.name(), fake.unique.email(), fake.phone_number(), fake.date_time_this_year(), fake.cpf())
@@ -40,7 +40,7 @@ try:
     psycopg2.extras.execute_values(cursor, insert_query, clientes, page_size=1000)
     cliente_ids = [row[0] for row in cursor.fetchall()]
 
-    # 2. Produtos
+    # Produtos
     print(f"Gerando e inserindo {NUM_PRODUTOS} produtos...")
     categorias_produto = ['Eletrônicos', 'Móveis', 'Livros', 'Roupas', 'Ferramentas', 'Esportes']
     produtos = [
@@ -51,10 +51,10 @@ try:
     psycopg2.extras.execute_values(cursor, insert_query, produtos, page_size=1000)
     produto_ids_com_preco = [(row[0],) for row in cursor.fetchall()]
 
-    # Mapear IDs para preços para facilitar a busca
+    # Mapear IDs para preços 
     produto_map = {produto_ids_com_preco[i][0]: produtos[i] for i in range(len(produtos))}
 
-    # 3. Gerar Pedidos, Itens e Pagamentos
+    # Gerar Pedidos, Itens e Pagamentos
     print(f"Gerando {NUM_PEDIDOS} pedidos, seus itens e pagamentos...")
     pedidos_data = []
     pedido_itens_data = []
